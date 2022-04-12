@@ -1,0 +1,51 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+
+class GFG {
+   static int n=10;
+   static  int upper_bound(ArrayList<Integer>arr,int key)
+   {
+    int ind=Collections.binarySearch(arr,key);
+    if(ind<0)
+    {
+        return Math.abs(ind)-1;
+    }
+    else{
+          while (ind < n) {
+  
+                // If current value is same
+                if (arr.get(ind) == key)
+                    ind++;
+  
+                // Current value is different which means
+                // it is the greater than the key
+                else {
+                    
+                    return ind;
+                }
+            }
+            return -1;
+    }
+}
+	public static void main (String[] args) {
+	  ArrayList<Integer>arr=new ArrayList<>();
+	  Scanner sc=new Scanner(System.in);
+	  
+	  for(int i=0;i<10;i++)
+	  {
+	      int x=sc.nextInt();
+	      arr.add(x);
+	  }
+	  int key=sc.nextInt();
+	  int index=upper_bound(arr,key);
+	  if(index<n && index>0)
+	  {
+	      System.out.println(arr.get(index));
+	  }
+	  else{
+	      System.out.println(-1);
+	  }
+	}
+}
