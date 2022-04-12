@@ -1,0 +1,44 @@
+class Solution {
+    int lower_bound(ArrayList<Integer>nums,int key)
+    {
+        int ind = Collections.binarySearch(nums, key);
+        //if element not found
+        if(ind<0)
+        {
+          return Math.abs(ind)-1;   
+        }
+        else
+        {
+            while(ind>0)
+            {
+                if(nums.get(ind-1)==key)
+                {
+                    ind--;
+                }
+                else
+                {
+                    return ind;
+                }
+            }
+        }
+        return ind;
+    }
+    public int lengthOfLIS(int[] nums) {
+        int n=nums.length;
+        ArrayList<Integer>seq=new ArrayList<>();
+        seq.add(nums[0]);
+        for(int i=1;i<n;i++)
+        {
+            if(nums[i]>seq.get(seq.size()-1))
+            {
+                seq.add(nums[i]);
+            }
+            else
+            {
+                int ind=lower_bound(seq,nums[i]);
+                seq.set(ind,nums[i]);
+            }
+        }
+        return seq.size();
+    }
+}
